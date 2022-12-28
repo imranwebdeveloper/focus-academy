@@ -18,7 +18,6 @@ const Login = () => {
     } else {
       setUser({ userName, password });
       navigate("/");
-      console.log({ userName, password });
     }
   };
 

@@ -6,6 +6,7 @@ import Spinner from "./Spinner";
 const Users = ({ data }) => {
   const [items, setItem] = useState(data.slice(0, 10));
   const [hasMore, setHasMore] = useState(true);
+
   const fetchData = () => {
     setTimeout(() => {
       setItem((item) => [
