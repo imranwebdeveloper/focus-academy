@@ -7,10 +7,10 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      // <Protect>
-      <Home />
+      <Protect>
+        <Home />
+      </Protect>
     ),
-    // </Protect>
   },
   {
     path: "/login",

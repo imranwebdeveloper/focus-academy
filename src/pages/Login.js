@@ -1,41 +1,60 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContextProvider";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const { setUser } = useContext(AuthContext);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const userName = e.target.userName.value;
+    const password = e.target.password.value;
+    if (userName !== "foo" || password !== "bar") {
+      setError(
+        " Invalid Credential!  Please use (User Name : foo and Password : bar)"
+      );
+    } else {
+      setUser({ userName, password });
+      navigate("/");
+      console.log({ userName, password });
+    }
+  };
+
   return (
     <section className=" flex min-h-screen  text-gray-800">
       <div className=" flex-1 flex flex-col justify-center  p-4">
         <div className="text-center">
-          <img
-            className="mx-auto w-48"
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-            alt="logo"
-          />
-          <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">
-            We are The Lotus Team
+          <h4 className="text-2xl font-semibold mt-1 mb-12 pb-1">
+            We are Focus Academy
           </h4>
         </div>
-        <form className="max-w-[450px] w-full mx-auto">
+        <form className="max-w-[450px] w-full mx-auto" onSubmit={submitHandler}>
           <p className="mb-4">Please login to your account</p>
           <div className="mb-4">
             <input
               type="text"
+              name="userName"
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="exampleFormControlInput1"
               placeholder="Username"
+              required
             />
           </div>
           <div className="mb-4">
             <input
               type="password"
+              name="password"
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="exampleFormControlInput1"
               placeholder="Password"
+              required
             />
           </div>
+          {error && <p className="text-red-600 text-sm">{error}</p>}
           <div className="text-center pt-1 mb-12 pb-1">
             <button
               className="inline-block px-6 py-3 text-white font-medium text-xs leading-tight uppercase rounded shadow-md bg-gradient  hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-              type="button"
+              type="submit"
               data-mdb-ripple="true"
               data-mdb-ripple-color="light"
             >
